@@ -1,7 +1,9 @@
 package com.gsitm.ustra.java.sample.cache;
 
+import java.util.List;
 import java.util.Map;
 
+import oracle.net.ano.AuthenticationService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -60,4 +62,11 @@ public class SampleCacheController {
 		return sampleCacheService.cacheClear();
 	}
 
+	@GetMapping("/code")
+	@ApiOperation(value = "DB List 조회", notes = "<strong>DB List</string>를 조회")
+	public List<SampleCacheModel> getAll(String useYn) {
+		SampleCacheModel.Criteria criteria = new SampleCacheModel.Criteria();
+		criteria.setUseYn(useYn);
+		return sampleCacheService.getAll(criteria);
+	}
 }

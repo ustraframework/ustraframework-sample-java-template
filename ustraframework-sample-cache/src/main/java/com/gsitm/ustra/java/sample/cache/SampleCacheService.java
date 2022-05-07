@@ -102,4 +102,8 @@ public class SampleCacheService {
 		return map;
 	}
 	*/
+
+	public List<SampleCacheModel> getAll(SampleCacheModel.Criteria criteria) {
+		return sampleCacheMapper.selectAll(criteria);
+	}
 }
