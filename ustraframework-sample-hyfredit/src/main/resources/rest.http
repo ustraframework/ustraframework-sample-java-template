@@ -1,0 +1,9 @@
+http://localhost:8981/api/sample/template?useYn=Y
+
+###
+POST http://localhost:8981/api/sample/template
+Content-Type: application/json
+
+{
+    "useYn": "Y"
+}
