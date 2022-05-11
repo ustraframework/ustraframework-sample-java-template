@@ -100,5 +100,6 @@ dependencies {
 	compile "com.gsitm.ustra.java.starter:ustra-starter-vue-bo:${ustraVersion}"
 	compile 'io.springfox:springfox-swagger2:3.0.0'
 	compile 'io.springfox:springfox-swagger-ui:3.0.0'
+    compile "com.gsitm.ustra.java:ustra-data-redis:${ustraVersion}"
 }
 

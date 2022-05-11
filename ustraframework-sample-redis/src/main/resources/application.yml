@@ -33,6 +33,11 @@ ustra:
           password: ENC(ohS/a1/Q/lKriwUq3rqJqht76fQ0Bnge)
     file:
       enabled: true
+    redis:
+      connection:
+        hostName: localhost
+        port: 6379
+        password:
   mvc:
     view:
       api-prefix: api
