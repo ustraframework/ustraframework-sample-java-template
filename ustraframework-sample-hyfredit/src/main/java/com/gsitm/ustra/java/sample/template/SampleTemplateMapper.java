@@ -5,6 +5,7 @@ import java.util.List;
 import org.apache.ibatis.annotations.Mapper;
 
 import com.gsitm.ustra.java.sample.config.annotations.DualMapper;
+import com.gsitm.ustra.java.sample.config.annotations.DualMethod;
 
 /**
  * 샘플 Mybatis Mapper
@@ -12,9 +13,9 @@ import com.gsitm.ustra.java.sample.config.annotations.DualMapper;
  *
  */
 @Mapper
+@DualMapper(clazz = SampleTemplateSecondMapper.class, mapperMethod = "selectAll")
 public interface SampleTemplateMapper {
-
-	@DualMapper(clazz = SampleTemplateSecondMapper.class, mapperMethod = "selectAll")
+	@DualMethod(methodName = "selectAll")
 	List<SampleTemplateModel> selectAll(SampleTemplateModel.Criteria criteria);
 
 }

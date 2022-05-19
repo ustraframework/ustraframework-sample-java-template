@@ -60,4 +60,14 @@ public class SampleTemplateController {
 		return this.sampleTemplateService.getAllByCache(criteria);
 	}
 
+	@PostMapping("/dual")
+	@ApiOperation(value = "전체 코드 목록 조회 - dual", notes = "<strong>코드 전체 목록</string>을 반환")
+	public List<SampleTemplateModel> getAllPostByDualMapper(@ApiParam("사용 여부") String useYn) {
+
+		SampleTemplateModel.Criteria criteria = new SampleTemplateModel.Criteria();
+		criteria.setUseYn(useYn);
+		log.info(Boolean.toString(customProxyCachingProperties.getCache().isBypass()));
+		return this.sampleTemplateService.getAllByDualMapper(criteria);
+	}
+
 }

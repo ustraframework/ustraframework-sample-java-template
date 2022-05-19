@@ -6,45 +6,111 @@ import java.lang.reflect.Method;
 import java.lang.reflect.Proxy;
 import java.util.HashMap;
 
+import org.aopalliance.aop.Advice;
+import org.aopalliance.intercept.MethodInterceptor;
+import org.aopalliance.intercept.MethodInvocation;
 import org.apache.ibatis.binding.MapperProxy;
-import org.springframework.aop.framework.Advised;
-import org.springframework.aop.support.AopUtils;
+import org.mybatis.spring.mapper.MapperFactoryBean;
 import org.springframework.beans.BeansException;
-import org.springframework.beans.FatalBeanException;
-import org.springframework.beans.factory.config.DestructionAwareBeanPostProcessor;
+import org.springframework.beans.factory.config.BeanPostProcessor;
 import org.springframework.util.ClassUtils;
+
+import com.gsitm.ustra.java.sample.config.annotations.DualMapper;
 
 import lombok.Data;
 import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
-public class CustomDualBeanPostProcessor implements DestructionAwareBeanPostProcessor {
+public class CustomDualBeanPostProcessor implements BeanPostProcessor {
+
+//	@Override
+//	public void postProcessBeanFactory(ConfigurableListableBeanFactory beanFactory) throws BeansException {
+//		// TODO Auto-generated method stub
+//
+//	}
+//
+//	@Override
+//	public void postProcessBeanDefinitionRegistry(BeanDefinitionRegistry registry) throws BeansException {
+//		// TODO Auto-generated method stub
+//
+//	}
 
 	@Override
-    public void postProcessBeforeDestruction(Object bean, String beanName)
-      throws BeansException {
-        this.process(bean, beanName);
-    }
-
-    @Override
-    public boolean requiresDestruction(Object bean) {
-        return true;
-    }
-
-    @Override
     public Object postProcessBeforeInitialization(Object bean, String beanName)
       throws BeansException {
-        return bean;
+    	log.info("===== postProcessBeforeInitialization : {}, {}, {}\n", beanName, bean.getClass(), ClassUtils.getUserClass(bean.getClass()));
+    	return bean;
     }
 
     @Override
     public Object postProcessAfterInitialization(Object bean, String beanName)
       throws BeansException {
-        this.process(bean,  beanName);
+    	log.info("===== postProcessAfterInitialization : {}, {}, {}\n", beanName, bean.getClass(), ClassUtils.getUserClass(bean.getClass()));
+    	bean = this.process(bean,  beanName);
+//    	if (Proxy.isProxyClass(bean.getClass()) ) {
+//    		log.info("===== after return : {}, {}", bean.getClass(), Proxy.getInvocationHandler(bean).getClass().getName());
+//    	}
         return bean;
     }
 
-	private void process(Object bean, String beanName) {
+//	@Override
+//	public void postProcessMergedBeanDefinition(RootBeanDefinition beanDefinition, Class<?> beanType, String beanName) {
+//		// TODO Auto-generated method stub
+//
+//        if ("sampleTemplateMapper".equals(beanName)) {
+//        	log.info("isProxyClass : {}", Proxy.isProxyClass(beanDefinition.getBeanClass()));
+//        }
+//
+//		if (MapperProxy.class.isAssignableFrom(beanType)) {
+//			try {
+//				this.registerDynamicMapperFactoryBean(beanDefinition, beanType, beanName);
+//			} catch (Exception e) {
+//				log.error(e.getMessage(), e);
+//			}
+//		}
+//
+//	}
+
+
+//	private final Map<Class<?>, MapperProxyFactory<?>> knownMappers = new HashMap<>();
+//
+//	private void registerDynamicMapperFactoryBean(RootBeanDefinition beanDefinition, Class<?> beanType, String beanName) throws Exception {
+//
+////		MultiDataSourceProperties multiDataSourceProperties = UstraEnvironmentUtils.bindProperties(new MultiDataSourceProperties(), MultiDataSourceProperties.PREFIX, environment);
+////		if (!multiDataSourceProperties.isSeparatedMybatisScan()) {
+////			DataSource dataSource = this.beanFactory.getBean(DataSource.class);
+////			this.registerSqlSessionFactoryBean(dataSource, null, true, null);
+////		} else {
+////
+////			for(Entry<String, SourceProperties> e : multiDataSourceProperties.getDatasources().entrySet()) {
+////				SourceProperties.Mybatis mybatisProp = e.getValue().getMybatis();
+////				DataSource dataSource = this.beanFactory.getBean(e.getKey(), DataSource.class);
+////
+////				Assert.notNull(dataSource, "dataSource name" + e.getKey() + " have to not be null");
+////				this.registerSqlSessionFactoryBean(dataSource, e.getKey(), multiDataSourceProperties.getDefaultDatasourceName().equals(e.getKey()), mybatisProp);
+////			}
+////
+////		}
+//
+//
+//	    if (Proxy.isProxyClass(beanType.getClass()) ) {
+//	    	@SuppressWarnings("unchecked")
+//			final MapperProxyFactory<T> mapperProxyFactory = (MapperProxyFactory<T>) knownMappers.get(beanType);
+//	    	if (mapperProxyFactory == null) {
+//	  	      throw new BindingException("Type " + beanType + " is not known to the MapperRegistry.");
+//	  	    }
+//	  	    try {
+//	  	      // return mapperProxyFactory.newInstance(sqlSession);
+//	  	    } catch (Exception e) {
+//	  	      throw new BindingException("Error getting mapper instance. Cause: " + e, e);
+//	  	    }
+//	    }
+//
+//	}
+
+
+
+	private Object process(Object bean, String beanName) {
         // Object proxy = this.getTargetObject(bean);
         log.info("===== beanName : {}, {}, {}\n", beanName, bean.getClass(), ClassUtils.getUserClass(bean.getClass()));
         // MapperFactoryBean.getObjectType
@@ -55,6 +121,25 @@ public class CustomDualBeanPostProcessor implements DestructionAwareBeanPostProc
         	log.info("isProxyClass : {}", Proxy.isProxyClass(bean.getClass()));
 
 
+        }
+
+        if (bean instanceof MapperFactoryBean) {
+
+        	log.info("===== MapperFactoryBean first : bean : {}", bean.getClass());
+
+        	MapperFactoryBean mfb = (MapperFactoryBean) bean;
+
+        	log.info("===== MapperFactoryBean start : bean : {}, mfb : {}", bean.getClass(), mfb.getClass());
+
+        	DualMapper dualMapper = (DualMapper) mfb.getMapperInterface().getAnnotation(DualMapper.class);
+        	mfb.setMapperInterface(dualMapper.clazz());
+
+        	log.info("===== MapperFactoryBean e n d : bean : {}, mfb : {}", bean.getClass(), mfb.getClass());
+
+        	return mfb;
+
+//        	mfb.getMapperInterface().getAnnotationsByType(DualMapper.class)[0].annotationType().getDeclaredAnnotationsByType(annotationClass)
+        	//mfb.setMapperInterface(mapperInterface);
         }
 
         if (Proxy.isProxyClass(bean.getClass()) ) {
@@ -68,7 +153,22 @@ public class CustomDualBeanPostProcessor implements DestructionAwareBeanPostProc
 
 					Class<?> mapperInterfaceClass = (Class<?>)field.get(mapperProxy);
 					log.info("mapperInterfaceClass : {}", mapperInterfaceClass);
-				} catch (Exception e) {
+
+					TargetBeanInfo targetBeanInfo = new TargetBeanInfo();
+					targetBeanInfo.setBean(bean);
+					targetBeanInfo.setBeanName(beanName);
+					targetBeanInfo.setMapperInterface(mapperInterfaceClass);
+
+					log.info("===== proxy before : {}, {}", bean.getClass(), handler.getClass());
+//					Proxy.newProxyInstance(
+//							mapperInterfaceClass.getClassLoader() ,
+//							new Class[] { mapperInterfaceClass },
+//							new CustomProxyHandler(targetBeanInfo));
+
+
+					log.info("===== proxy after : {}, {}", bean.getClass(), handler.getClass());
+
+        		} catch (Exception e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
@@ -76,13 +176,7 @@ public class CustomDualBeanPostProcessor implements DestructionAwareBeanPostProc
 
         }
 
-//        if (bean instanceof MapperProxy) {
-//        	Object targetObject = this.getTargetObject(bean);
-//        	log.warn("targetObject : {}", targetObject.getClass());
-//        }
 
-//        org.apache.ibatis.binding.MapperProxy
-//
 //        if (proxy.getClass().getName() == "org.mybatis.spring.mapper.MapperFactoryBean") {
 //        	MapperFactoryBean mfb = (MapperFactoryBean) proxy;
 //
@@ -109,9 +203,11 @@ public class CustomDualBeanPostProcessor implements DestructionAwareBeanPostProc
 //        	log.error("매퍼 : {}, 메소드 : {}", proxyMapper.getClass().getName(), proxyMethod);
 //
 //        }
+        return bean;
     }
 
-    @Data
+
+	@Data
     public static class TargetBeanInfo {
     	private Object bean;
     	private String beanName;
@@ -126,13 +222,14 @@ public class CustomDualBeanPostProcessor implements DestructionAwareBeanPostProc
     	private TargetBeanInfo beanInfo;
 
     	public CustomProxyHandler(TargetBeanInfo beanInfo) {
+    		log.info("===== CustomProxyHandler : {}", beanInfo.getBeanName());
     		this.beanInfo = beanInfo;
     	}
 
 		@Override
 		public Object invoke(Object proxy, Method method, Object[] args) throws Throwable {
 			// proxy object의 annotation 확인
-
+			log.info("===== invoke : {}", this.beanInfo.getBeanName());
 			// TODO: DualMapper annotation 이 없는 경우 원본 실행
 			// 원본 실행
 			Proxy.getInvocationHandler(Proxy.getInvocationHandler(this.beanInfo.getBean())).invoke(proxy, method, args);
@@ -144,4 +241,23 @@ public class CustomDualBeanPostProcessor implements DestructionAwareBeanPostProc
 		}
 
     }
+
+    public static class CustomMethidInterceptor implements MethodInterceptor, Advice {
+
+		@Override
+		public Object invoke(MethodInvocation invocation) throws Throwable {
+			// TODO Auto-generated method stub
+			log.info("===== CustomMethidInterceptor : {}", invocation.getMethod());
+			return null;
+		}
+
+
+
+    }
+
+
+
+
+
+
 }

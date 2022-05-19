@@ -10,4 +10,9 @@ public class CustomPostProcessorConfiguration {
 	public CustomDualBeanPostProcessor customDualBeanPostProcessor() {
 		return new CustomDualBeanPostProcessor();
 	}
+
+//	@Bean
+//	public CustomBeanDefinitionRegistryPostProcessor customBeanDefinitionRegistryPostProcessor() {
+//		return new CustomBeanDefinitionRegistryPostProcessor();
+//	}
 }

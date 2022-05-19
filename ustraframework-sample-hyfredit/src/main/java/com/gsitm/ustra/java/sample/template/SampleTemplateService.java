@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.gsitm.ustra.java.core.cache.UstraCacheManagerSupport;
+import com.gsitm.ustra.java.sample.config.CustomMapperFactory;
 import com.gsitm.ustra.java.sample.config.annotations.DualMapper;
 
 /**
@@ -36,6 +37,10 @@ public class SampleTemplateService {
 	}
 
 	public List<SampleTemplateModel> getAllByDualMapper(SampleTemplateModel.Criteria criteria) {
+
+//		SampleTemplateMapper sampleTemplateMapper2 = CustomMapperFactory.getMapper(SampleTemplateMapper.class);
+//		return sampleTemplateMapper2.selectAll(criteria);
+
 		return this.sampleTemplateMapper.selectAll(criteria);
 	}
 }

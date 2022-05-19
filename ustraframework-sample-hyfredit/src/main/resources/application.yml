@@ -1,4 +1,3 @@
-
 debug: true
 
 server:
@@ -7,6 +6,9 @@ server:
 spring:
   profiles:
     active: local
+  aop:
+    proxy-target-class: true
+    
 
 mybatis:
   mapperLocations: classpath:/mapper/**/*.xml
