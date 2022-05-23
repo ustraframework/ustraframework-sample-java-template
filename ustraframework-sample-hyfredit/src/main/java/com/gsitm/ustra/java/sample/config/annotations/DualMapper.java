@@ -9,7 +9,6 @@ import java.lang.annotation.Target;
 @Retention(RetentionPolicy.RUNTIME)
 @Target(ElementType.TYPE)
 public @interface DualMapper {
-	String mapperName() default "";
-	String mapperMethod() default "";
+	String beanName();
 	Class<?> clazz();
 }

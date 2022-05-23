@@ -6,9 +6,8 @@ server:
 spring:
   profiles:
     active: local
-  aop:
+  aop: 
     proxy-target-class: true
-    
 
 mybatis:
   mapperLocations: classpath:/mapper/**/*.xml
@@ -42,7 +41,6 @@ ustra:
     redis:
       cache:
         enabled: true
-        bypass: true
       connection:
         hostName: localhost
         port: 6379
@@ -73,3 +71,8 @@ ustra:
         secret-key: asddflkhjasd
         enable-refresh-token: true
         refresh-valid-seconds: 6000
+app:
+  redis:
+    bypass: true
+  mybatis:
+    dual-mapper: true

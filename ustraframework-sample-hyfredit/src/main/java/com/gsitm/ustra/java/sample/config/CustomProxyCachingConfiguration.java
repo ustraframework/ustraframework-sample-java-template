@@ -12,7 +12,7 @@ import lombok.extern.slf4j.Slf4j;
 
 @Configuration
 @EnableConfigurationProperties({ CustomProxyCachingProperties.class })
-@ConditionalOnProperty(name = "ustra.data.redis.cache.bypass", havingValue = "true")
+@ConditionalOnProperty(name = "app.redis.bypass", havingValue = "true")
 @Slf4j
 public class CustomProxyCachingConfiguration {
 	// TODO: BeanDefinitionRegistryPostProcessor 를 구현하여, bean을 교체하도록 처리

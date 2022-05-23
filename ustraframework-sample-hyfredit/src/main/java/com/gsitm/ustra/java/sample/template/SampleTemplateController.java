@@ -56,7 +56,7 @@ public class SampleTemplateController {
 
 		SampleTemplateModel.Criteria criteria = new SampleTemplateModel.Criteria();
 		criteria.setUseYn(useYn);
-		log.info(Boolean.toString(customProxyCachingProperties.getCache().isBypass()));
+		log.info(Boolean.toString(customProxyCachingProperties.getBypass()));
 		return this.sampleTemplateService.getAllByCache(criteria);
 	}
 
@@ -66,7 +66,6 @@ public class SampleTemplateController {
 
 		SampleTemplateModel.Criteria criteria = new SampleTemplateModel.Criteria();
 		criteria.setUseYn(useYn);
-		log.info(Boolean.toString(customProxyCachingProperties.getCache().isBypass()));
 		return this.sampleTemplateService.getAllByDualMapper(criteria);
 	}
 
