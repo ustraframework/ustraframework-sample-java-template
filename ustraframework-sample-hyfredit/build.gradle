@@ -31,7 +31,7 @@ group = 'com.gsitm.ustra.java'
 version = '0.0.1-SNAPSHOT'
 
 ext {
-	ustraVersion = '2.0.51.127-SNAPSHOT'
+	ustraVersion = '2.0.52.1-SNAPSHOT'
     set('springCloudVersion', "Hoxton.SR3")
     set('log4j2.version', '2.17.1')
 }
@@ -99,7 +99,7 @@ dependencies {
 
 dependencies {
 	compile "com.gsitm.ustra.java.starter:ustra-starter-vue-bo:${ustraVersion}"
-	implementation 'com.gsitm.ustra.java:ustra-data-redis:2.0.51.127-SNAPSHOT'
+	implementation 'com.gsitm.ustra.java:ustra-data-redis:2.0.52.1-SNAPSHOT'
 	compile 'io.springfox:springfox-swagger2:2.9.2'
 	compile 'io.springfox:springfox-swagger-ui:2.9.2'
 }

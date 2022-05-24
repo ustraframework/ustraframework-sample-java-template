@@ -24,6 +24,7 @@ ustra:
     procedure-manager:
       enabled: true
     datasource:
+      separated-mybatis-scan: true
       default-datasource-name: rds1
       datasources:
         rds1:
@@ -31,11 +32,20 @@ ustra:
           driver-class-name: net.sf.log4jdbc.sql.jdbcapi.DriverSpy
           username: ENC(p6rIPoShJklFLPxHKNJYFLooNCd2xnkayNZ2f+GexyA17qEMS77u8g==)
           password: ENC(ohS/a1/Q/lKriwUq3rqJqht76fQ0Bnge)
+          mybatis:
+            base-packages: com.gsitm.ustra.java.sample.template #base package는 필수 값
+            mapper-locations: classpath*:/mapper/**/*.xml # mapper의 리소스 범위 지정
         rds2:
           url: jdbc:log4jdbc:sqlserver://framework-sqlserver.c0uiyan5ae24.ap-northeast-2.rds.amazonaws.com:1433;databaseName=USTRA_FW_SPL
           driver-class-name: net.sf.log4jdbc.sql.jdbcapi.DriverSpy
           username: ENC(p6rIPoShJklFLPxHKNJYFLooNCd2xnkayNZ2f+GexyA17qEMS77u8g==)
           password: ENC(ohS/a1/Q/lKriwUq3rqJqht76fQ0Bnge)
+          mybatis:
+            base-packages: com.gsitm.ustra.java.sample.template
+            annotation-class-name: com.gsitm.ustra.java.sample.config.annotations.Rds2Mapper
+            mapper-locations: classpath*:/mapper2/**/*.xml
+    mybatis:
+      excludeMapperLocationPatterns: test.xml
     file:
       enabled: true
     redis:
@@ -73,6 +83,6 @@ ustra:
         refresh-valid-seconds: 6000
 app:
   redis:
-    bypass: true
+    bypass: false
   mybatis:
     dual-mapper: true

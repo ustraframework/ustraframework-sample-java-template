@@ -2,7 +2,9 @@ package com.gsitm.ustra.java.sample.config;
 
 import java.lang.reflect.Field;
 import java.lang.reflect.InvocationHandler;
+import java.lang.reflect.Method;
 import java.lang.reflect.Proxy;
+import java.util.HashMap;
 
 import org.apache.ibatis.binding.MapperProxy;
 import org.springframework.beans.BeansException;
@@ -79,7 +81,7 @@ public class CustomDualMapperBeanPostProcessor implements BeanPostProcessor {
 					bean = Proxy.newProxyInstance(
 						mapperInterfaceClass.getClassLoader() ,
 						new Class[] { mapperInterfaceClass },
-						new CustomDualMapperProxyHandler(targetBeanInfo)
+						new CustomDualMapperProxyHandler(targetBeanInfo, new HashMap<String, Object>(), new HashMap<String, Method>())
 						);
 
 					log.info("===== proxy after : {}, {}", bean.getClass(), handler.getClass());

@@ -12,8 +12,7 @@ import com.gsitm.ustra.java.sample.config.annotations.DualMapper;
  *
  */
 @Mapper
-@DualMapper(clazz = SampleTemplateSecondMapper.class, beanName = "sampleTemplateSecondMapper")
+@DualMapper(SampleTemplateSecondMapper.class)
 public interface SampleTemplateMapper {
 	List<SampleTemplateModel> selectAll(SampleTemplateModel.Criteria criteria);
-
 }
