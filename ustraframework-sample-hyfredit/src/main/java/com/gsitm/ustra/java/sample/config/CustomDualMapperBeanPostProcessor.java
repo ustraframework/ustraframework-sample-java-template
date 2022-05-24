@@ -81,7 +81,7 @@ public class CustomDualMapperBeanPostProcessor implements BeanPostProcessor {
 					bean = Proxy.newProxyInstance(
 						mapperInterfaceClass.getClassLoader() ,
 						new Class[] { mapperInterfaceClass },
-						new CustomDualMapperProxyHandler(targetBeanInfo, new HashMap<String, Object>(), new HashMap<String, Method>())
+						new CustomDualMapperProxyHandler(targetBeanInfo)
 						);
 
 					log.info("===== proxy after : {}, {}", bean.getClass(), handler.getClass());
