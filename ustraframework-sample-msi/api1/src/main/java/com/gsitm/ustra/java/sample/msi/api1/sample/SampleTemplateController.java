@@ -8,6 +8,9 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.gsitm.ustra.java.sample.msi.main.interfaces.SampleMSI;
+import com.gsitm.ustra.java.sample.msi.main.interfaces.SampleTemplateModel;
+
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
@@ -20,7 +23,7 @@ import io.swagger.annotations.ApiParam;
 @Api("샘플 템플릿 API")
 @RestController
 @RequestMapping("/api/sample")
-public class SampleTemplateController {
+public class SampleTemplateController implements SampleMSI {
 
 	@Autowired private SampleTemplateService sampleTemplateService;
 

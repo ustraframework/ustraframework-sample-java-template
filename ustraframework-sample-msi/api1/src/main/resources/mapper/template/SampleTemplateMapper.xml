@@ -4,7 +4,8 @@
 
 <mapper namespace="com.gsitm.ustra.java.sample.msi.api1.sample.SampleTemplateMapper">
 
-	<select id="selectAll" resultType="com.gsitm.ustra.java.sample.msi.api1.sample.SampleTemplateModel">
+	<!-- <select id="selectAll" resultType="com.gsitm.ustra.java.sample.msi.api1.sample.SampleTemplateModel"> -->
+	<select id="selectAll" resultType="com.gsitm.ustra.java.sample.msi.main.interfaces.SampleTemplateModel">
 		SELECT GRP_CD
 			  ,DTL_CD
 			  ,CD_NM

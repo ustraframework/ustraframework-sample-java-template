@@ -6,6 +6,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.gsitm.ustra.java.sample.msi.main.interfaces.SampleTemplateModel;
+
 /**
  * Sample Template 서비스
  * @author RoyLee
