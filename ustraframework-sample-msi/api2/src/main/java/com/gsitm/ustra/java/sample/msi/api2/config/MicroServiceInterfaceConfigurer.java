@@ -1,4 +1,4 @@
-package com.gsitm.ustra.java.sample.msi.api1.config;
+package com.gsitm.ustra.java.sample.msi.api2.config;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -16,7 +16,7 @@ public class MicroServiceInterfaceConfigurer {
 	@Bean
 	public MicroServiceInterfaceBeanDefinitionRegistryPostProcessor microserviceInterfaceBeanDefinitionRegistryPostProcessor() {
 		List<String> basePackageList = new ArrayList<String>();
-		basePackageList.add("com.gsitm.ustra.java.sample.microserviceinterface.api1");
+		basePackageList.add("com.gsitm.ustra.java.sample.msi.api2");
 
 		return new MicroServiceInterfaceBeanDefinitionRegistryPostProcessor(
 					basePackageList,
@@ -27,3 +27,4 @@ public class MicroServiceInterfaceConfigurer {
 				);
 	}
 }
+

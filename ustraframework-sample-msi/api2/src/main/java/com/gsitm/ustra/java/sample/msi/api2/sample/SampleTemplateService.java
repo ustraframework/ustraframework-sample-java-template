@@ -19,14 +19,14 @@ public class SampleTemplateService {
 
 	@Autowired private SampleTemplateMapper sampleTemplateMapper;
 
-	@Autowired private SampleMSI api2;
+	@Autowired private SampleMSI api1;
 
 	/**
 	 * 전체 코드 목록 조회
 	 * @return 코드 목록
 	 */
 	public List<SampleTemplateModel> getAll(SampleTemplateModel.Criteria criteria) {
-		final List<com.gsitm.ustra.java.sample.msi.main.interfaces.SampleTemplateModel> itemList = api2.getAll("Y");
+		final List<com.gsitm.ustra.java.sample.msi.main.interfaces.SampleTemplateModel> itemList = api1.getAll("Y");
 		return this.sampleTemplateMapper.selectAll(criteria);
 	}
 
