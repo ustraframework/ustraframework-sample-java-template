@@ -1,0 +1,10 @@
+repositories {
+
+}
+
+dependencies {
+	compile "com.gsitm.ustra.java.starter:ustra-starter-restapi:${ustraVersion}"
+	compile "com.gsitm.ustra.java:ustra-mvc-view:${ustraVersion}"
+	compile "com.gsitm.ustra.java:ustra-data-mybatis:${ustraVersion}"
+	compile "com.gsitm.ustra.java:ustra-security-jwt:${ustraVersion}"
+}
