@@ -16,13 +16,12 @@ public class MicroServiceInterfaceConfigurer {
 	@Bean
 	public MicroServiceInterfaceBeanDefinitionRegistryPostProcessor microserviceInterfaceBeanDefinitionRegistryPostProcessor() {
 		List<String> basePackageList = new ArrayList<String>();
-		basePackageList.add("com.gsitm.ustra.java.sample.msi.api2");
+		basePackageList.add("com.gsitm.ustra.java.sample.msi");
 
 		return new MicroServiceInterfaceBeanDefinitionRegistryPostProcessor(
 					basePackageList,
 					MicroServiceInterfaceAnnotation.class,
 					MicroServiceInterfaceFactoryBean.class,
-					// 컴포넌트????
 					new DefaultMicroServiceInterfaceClient()
 				);
 	}
