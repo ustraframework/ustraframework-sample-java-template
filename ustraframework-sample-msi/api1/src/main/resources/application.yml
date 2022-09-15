@@ -48,7 +48,7 @@ ustra:
       client-crypto-key: Z3NjLWNyeXB0by1rZXkxMQ==
       type: STATIC_THYEMELEAF
     rest:
-      exclude-wrapping-url-patterns: /v2/api-docs,/swagger-resources/**,/swagger-ui.html,/webjars/**
+      exclude-wrapping-url-patterns: /v2/api-docs,/swagger-resources/**,/swagger-ui.html,/webjars/**, /api/fo/od/proxy
     wrapper:
       exclude-request-url-patterns: /v2/api-docs
       exclude-response-url-patterns: /v2/api-docs

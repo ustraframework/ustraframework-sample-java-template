@@ -24,7 +24,7 @@ public class JsonRpcRequest {
         private String methodName;
         private String[] argumentClassList;
         private String[] argumentNameList;
-//        private argumentList
+        private String[] argumentList;
 
 	}
 

@@ -12,5 +12,5 @@ import lombok.Setter;
 @Getter
 @Setter
 public class JsonRpcResponse {
-	private Object result;
+	private String result;
 }

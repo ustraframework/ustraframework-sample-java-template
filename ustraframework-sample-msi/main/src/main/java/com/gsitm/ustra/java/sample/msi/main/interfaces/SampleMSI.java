@@ -10,5 +10,7 @@ import io.swagger.annotations.ApiParam;
 public interface SampleMSI {
 	List<SampleTemplateModel> getAll(@ApiParam("사용 여부") String useYn);
 
-	public List<SampleTemplateModel> getAllPost(@ApiParam("사용 여부") String useYn);
+	List<SampleTemplateModel> getAllPost(@ApiParam("사용 여부") String useYn);
+
+	List<String> getTest(GetTestParam param);
 }
