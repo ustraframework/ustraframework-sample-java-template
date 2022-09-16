@@ -68,3 +68,6 @@ ustra:
         secret-key: asddflkhjasd
         enable-refresh-token: true
         refresh-valid-seconds: 6000
+  msa:
+    proxy-uri:
+      api1: http://localhost:10011/api/fo/od/proxy

@@ -13,7 +13,9 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.gsitm.ustra.java.sample.msi.api1.sample.JsonRpcRequest.Params;
+import com.gsitm.ustra.java.sample.msi.main.model.JsonRpcRequest;
+import com.gsitm.ustra.java.sample.msi.main.model.JsonRpcResponse;
+import com.gsitm.ustra.java.sample.msi.main.model.JsonRpcRequest.Params;
 
 @RestController
 public class ProxyController {
@@ -81,7 +83,7 @@ public class ProxyController {
 	private Method discoveryMethod(Params params) {
 
 		final String methodName = params.getMethodName();
-		final String[] parameterNames = params.getArgumentNameList();
+//		final String[] parameterNames = params.getArgumentNameList();
 		final String[] parameterClassNames = params.getArgumentClassList();
 		final List<Class<?>> paramClasses = Stream.of(parameterClassNames).map(each -> {
 			Class<?> result  = null;
@@ -108,7 +110,7 @@ public class ProxyController {
 				continue;
 			}
 
-			if (each.getParameterCount() != parameterNames.length) {
+			if (each.getParameterCount() != parameterClassNames.length) {
 				continue;
 			}
 

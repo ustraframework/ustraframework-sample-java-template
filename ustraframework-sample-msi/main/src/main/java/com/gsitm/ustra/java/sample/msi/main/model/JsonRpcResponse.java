@@ -1,4 +1,4 @@
-package com.gsitm.ustra.java.sample.msi.api1.sample;
+package com.gsitm.ustra.java.sample.msi.main.model;
 
 import lombok.Getter;
 import lombok.Setter;

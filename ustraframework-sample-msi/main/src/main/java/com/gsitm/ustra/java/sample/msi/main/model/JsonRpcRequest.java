@@ -1,4 +1,4 @@
-package com.gsitm.ustra.java.sample.msi.api1.sample;
+package com.gsitm.ustra.java.sample.msi.main.model;
 
 import java.util.List;
 
@@ -23,7 +23,6 @@ public class JsonRpcRequest {
         private String className;
         private String methodName;
         private String[] argumentClassList;
-        private String[] argumentNameList;
         private String[] argumentList;
 
 	}
