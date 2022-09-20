@@ -9,8 +9,9 @@ import lombok.Data;
 
 @Component
 @Data
-@ConfigurationProperties(prefix = "ustra.msa")
+@ConfigurationProperties(value = BaseUrlProperties.PREFIX)
 public class BaseUrlProperties {
+	public static final String PREFIX = "ustra.msa";
 	private HashMap<String, String> proxyUri;
 
 }
