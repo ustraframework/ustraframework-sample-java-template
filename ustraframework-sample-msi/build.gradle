@@ -10,7 +10,7 @@ buildscript {
     repositories {
         mavenCentral()
         maven { url "https://plugins.gradle.org/m2/" }
-        maven { url "https://repo.gsitm.com/repository/m2-public/" }
+        maven { url "http://repo.ustraframework.kro.kr/repository/maven-public/" }
     }
 
     dependencies {
@@ -82,8 +82,7 @@ subprojects {
 
     repositories {
       	mavenCentral()
-	    maven { url "https://repo.gsitm.com/repository/public/" }
-	    maven { url "https://repo.gsitm.com/repository/m2-public/" }
+	    maven { url "http://repo.ustraframework.kro.kr/repository/maven-public/" }
     }
 
     dependencies {
